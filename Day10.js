@@ -118,3 +118,33 @@ dataInput.forEach((adapterVoltage, index) => {
 
 console.log(noOfOneJumps*noOfThreeJumps);
 
+const group = [];
+const groupLengths = [];
+
+dataInput.forEach((adapter, index) => {
+  if(group.length === 0){
+    group.push(adapter);
+  } else if(group[group.length - 1] === adapter - 1){
+    group.push(adapter);
+  } else {
+    groupLengths.push(group.length);
+    group.splice(0, group.length, adapter);
+  }
+});
+
+const answer2 = groupLengths
+  .filter(a => a > 2)
+  .map(a => {
+    switch (a) {
+      case 3:
+        return 2
+      case 5:
+        return 7;
+      default:
+        return a;
+    }
+  })
+  .reduce((total, number) => total * number)
+
+console.log(answer2);
+
